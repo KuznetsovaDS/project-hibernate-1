@@ -1,23 +1,43 @@
 package com.game.entity;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
+@NamedQuery(
+        name = "Player.getAllCount",
+        query = "SELECT COUNT(p) FROM Player p"
+)
 
-
+@Entity
+@Table(schema = "rpg",name = "player")
 public class Player {
+
+    @Id
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 12)
     private String name;
 
+    @Column(nullable = false, length = 30)
     private String title;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
     private Race race;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
     private Profession profession;
 
+    @Column(nullable = false)
     private Date birthday;
 
+    @Column(nullable = false)
     private Boolean banned;
 
+    @Column(nullable = false)
     private Integer level;
 
     public Player() {
@@ -98,3 +118,4 @@ public class Player {
         this.level = level;
     }
 }
+
